@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <world name="pista">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact"/>
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+
+    <light type="directional" name="sol">
+      <pose>0 0 10 0 0 0</pose>
+      <direction>0.3 0.3 -1</direction>
+    </light>
+
+    <model name="piso">
+      <static>true</static>
+      <link name="link">
+        <collision name="col">
+          <geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry>
+          <material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ============================================== -->
+    <!-- 1. MUROS PERIMETRALES (La caja externa)        -->
+    <!-- ============================================== -->
+
+    <!-- Muro 1: Norte (largo) -->
+    <model name="muro_1">
+      <static>true</static>
+      <pose>2 3 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>6 0.1 0.5</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>6 0.1 0.5</size></box></geometry>
+          <material><ambient>0.8 0.2 0.2 1</ambient><diffuse>0.8 0.2 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Muro 2: Sur (largo) -->
+    <model name="muro_2">
+      <static>true</static>
+      <pose>2 -3 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>6 0.1 0.5</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>6 0.1 0.5</size></box></geometry>
+          <material><ambient>0.8 0.2 0.2 1</ambient><diffuse>0.8 0.2 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Muro 3: Este (corto) -->
+    <model name="muro_3">
+      <static>true</static>
+      <pose>5 0 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.1 6 0.5</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>0.1 6 0.5</size></box></geometry>
+          <material><ambient>0.8 0.2 0.2 1</ambient><diffuse>0.8 0.2 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Muro 4: Oeste (corto) -->
+    <model name="muro_4">
+      <static>true</static>
+      <pose>-1 0 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.1 6 0.5</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>0.1 6 0.5</size></box></geometry>
+          <material><ambient>0.8 0.2 0.2 1</ambient><diffuse>0.8 0.2 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ============================================== -->
+    <!-- 2. NÚCLEO CENTRAL                              -->
+    <!-- (Forma la pista en 'O' dejando un pasillo de ~1m) -->
+    <!-- ============================================== -->
+    <model name="nucleo_central">
+      <static>true</static>
+      <pose>2 0 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>4 4 0.5</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>4 4 0.5</size></box></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.3 0.3 0.3 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ============================================== -->
+    <!-- 3. ESTRECHAMIENTO (Requisito: reducir pasillo) -->
+    <!-- ============================================== -->
+    <model name="bloque_estrecho">
+      <static>true</static>
+      <!-- Ubicado en el pasillo norte, reduce el ancho a ~0.45m -->
+      <pose>1.5 2.25 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>1.0 0.6 0.5</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>1.0 0.6 0.5</size></box></geometry>
+          <material><ambient>0.2 0.7 0.2 1</ambient><diffuse>0.2 0.7 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ============================================== -->
+    <!-- 4. OBSTÁCULOS EN SLALOM (4 cilindros alternos) -->
+    <!-- ============================================== -->
+    <model name="obstaculo_1">
+      <static>true</static>
+      <pose>3.5 -2.2 0.25 0 0 0</pose> 
+      <link name="link">
+        <collision name="col"><geometry><cylinder><radius>0.2</radius><length>0.5</length></cylinder></geometry></collision>
+        <visual name="vis">
+          <geometry><cylinder><radius>0.2</radius><length>0.5</length></cylinder></geometry>
+          <material><ambient>0.2 0.2 0.7 1</ambient><diffuse>0.2 0.2 0.7 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="obstaculo_2">
+      <static>true</static>
+      <pose>2.5 -2.8 0.25 0 0 0</pose> 
+      <link name="link">
+        <collision name="col"><geometry><cylinder><radius>0.2</radius><length>0.5</length></cylinder></geometry></collision>
+        <visual name="vis">
+          <geometry><cylinder><radius>0.2</radius><length>0.5</length></cylinder></geometry>
+          <material><ambient>0.2 0.2 0.7 1</ambient><diffuse>0.2 0.2 0.7 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="obstaculo_3">
+      <static>true</static>
+      <pose>1.5 -2.2 0.25 0 0 0</pose> 
+      <link name="link">
+        <collision name="col"><geometry><cylinder><radius>0.2</radius><length>0.5</length></cylinder></geometry></collision>
+        <visual name="vis">
+          <geometry><cylinder><radius>0.2</radius><length>0.5</length></cylinder></geometry>
+          <material><ambient>0.2 0.2 0.7 1</ambient><diffuse>0.2 0.2 0.7 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="obstaculo_4">
+      <static>true</static>
+      <pose>0.5 -2.8 0.25 0 0 0</pose> 
+      <link name="link">
+        <collision name="col"><geometry><cylinder><radius>0.2</radius><length>0.5</length></cylinder></geometry></collision>
+        <visual name="vis">
+          <geometry><cylinder><radius>0.2</radius><length>0.5</length></cylinder></geometry>
+          <material><ambient>0.2 0.2 0.7 1</ambient><diffuse>0.2 0.2 0.7 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>

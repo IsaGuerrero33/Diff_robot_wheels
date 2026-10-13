@@ -1,0 +1,52 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 0.5
+      Plane Cell Count: 20
+      Reference Frame: odom
+    - Class: rviz_default_plugins/RobotModel
+      Name: RobotModel
+      Enabled: true
+      Description Source: Topic
+      Description Topic:
+        Value: /robot_description
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: true
+    - Class: rviz_default_plugins/Path
+      Name: Trayectoria deseada
+      Enabled: true
+      Color: 25; 255; 0
+      Line Width: 0.03
+      Topic:
+        Value: /trayectoria_ref
+    - Class: rviz_default_plugins/Path
+      Name: Trayectoria real
+      Enabled: true
+      Color: 255; 85; 0
+      Line Width: 0.03
+      Topic:
+        Value: /trayectoria_real
+  Global Options:
+    Fixed Frame: odom
+    Background Color: 48; 48; 48
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/SetGoal
+      Topic:
+        Value: /goal_pose
+  Views:
+    Current:
+      Class: rviz_default_plugins/TopDownOrtho
+      Name: Current View
+      Scale: 120
+      X: 1.5
+      Y: 0
+  Enabled: true
