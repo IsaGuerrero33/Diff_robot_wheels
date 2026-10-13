@@ -22,19 +22,19 @@ Simulación y control cinemático de un robot móvil de tracción diferencial (d
    git clone [https://github.com/IsaGuerrero33/Diff_robot_wheels.git](https://github.com/IsaGuerrero33/Diff_robot_wheels.git)
 
 2. Compilar los paquetes del modelo y de control:
-    Bash
+    ```bash
 
     cd ~/ros2_ws_dif_C2
     colcon build
     source install/setup.bash
 
 3. Lanzar la simulación (Gazebo Harmonic con la pista de obstáculos):
-    Bash
+    ```bash
 
     ros2 launch mi_robot_diferencial simulacion.launch.py
 
 4. En una nueva terminal, ejecutar el nodo de cálculo cinemático para ver el error en consola:
-    Bash
+    ```bash
 
     cd ~/ros2_ws_dif_C2
     source install/setup.bash
