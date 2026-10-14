@@ -31,7 +31,7 @@ from std_msgs.msg import Float64MultiArray
 
 # ===== Parámetros físicos (deben coincidir con el xacro) =====
 A_RUEDA = 0.05          # a : rueda_radio
-D_MEDIA = 0.25 / 2.0    # d : separacion_ruedas / 2
+D_MEDIA = 0.23 / 2.0    # d : separacion_ruedas / 2
 
 # ===== Ec. (22): ξ = [u, v, r]ᵀ = W ω,  con ω = [ω_izq, ω_der]ᵀ =====
 W = np.array([[ A_RUEDA / 2.0,             A_RUEDA / 2.0],

@@ -113,7 +113,7 @@
       <link name="link">
         <collision name="col"><geometry><box><size>1.0 0.6 0.5</size></box></geometry></collision>
         <visual name="vis">
-          <geometry><box><size>1.0 0.6 0.5</size></box></geometry>
+          <geometry><box><size>1.0 0.4 0.5</size></box></geometry>
           <material><ambient>0.2 0.7 0.2 1</ambient><diffuse>0.2 0.7 0.2 1</diffuse></material>
         </visual>
       </link>
